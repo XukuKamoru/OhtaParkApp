@@ -8,7 +8,7 @@
         Loaded="Window_Loaded"
         Title="" Height="650" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Background="Khaki">
-        <GroupBox x:Name="Order" Visibility="Visible">
+        <GroupBox x:Name="Order" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -20,16 +20,20 @@
                 <Label Content="Клиент" Grid.Row="0" FontSize="18"/>
                 <Label x:Name="userFullName" Width="370" Height="40" Margin="50,0,0,110"/>
                 <ComboBox x:Name="userCmb" Grid.Row="0" Width="300" Height="50" Margin="0,80,0,0" VerticalContentAlignment="Center" 
-                          SelectionChanged="userCmb_SelectionChanged"/>
+                          SelectionChanged="userCmb_SelectionChanged"
+                          SelectedIndex="{Binding Client}" DisplayMemberPath="Code"/>
                 
                 <Label Content="Услуги:" Grid.Row="1" FontSize="18"/>
                 <Label x:Name="ChoicedServices" Grid.Row="1" Width="350" Height="40" Margin="20,0,0,100" FontSize="16" VerticalContentAlignment="Center"/>
                 <ComboBox x:Name="serviceCmb" Grid.Row="1" Width="260" Height="50" VerticalAlignment="Center" Margin="0,20,150,0"
-                          SelectionChanged="serviceCmb_SelectionChanged"/>
+                          SelectionChanged="serviceCmb_SelectionChanged"
+                          SelectedIndex="{Binding Service}" DisplayMemberPath="SetviceName"/>
                 <Button x:Name="deleteService" Content="Удалить последнюю" Width="130" Height="50" Grid.Row="1" Margin="280,20,0,0" Click="deleteService_Click"/>
 
                 <Label Content="Статус" Grid.Row="2" FontSize="18"/>
-                <ComboBox x:Name="statusCmb" Grid.Row="2" Width="300" Height="50" FontSize="16" VerticalContentAlignment="Center"/>
+                <ComboBox x:Name="statusCmb" Grid.Row="2" Width="300" Height="50" FontSize="16" VerticalContentAlignment="Center"
+                          SelectionChanged="statusCmb_SelectionChanged"
+                          SelectedIndex="{Binding Status}" DisplayMemberPath="Status1"/>
 
                 <Button x:Name="addOrderBtn" Grid.Row="3" Width="250" Height="50" Margin="0,0,100,0" Content="Добавить" Click="addOrderBtn_Click"/>
                 <Button x:Name="cancelOrder" Grid.Row="3" Width="100" Height="50" Margin="300,0,0,0" Content="Отмена" Click="cancelOrder_Click"/>
@@ -50,25 +54,31 @@
                 
 
                 <Label Content="ФИО (обязательно через пробелы)" Grid.Row="0" FontSize="16"/>
-                <TextBox x:Name="fullNameBox" Grid.Row="0" Width="300" Height="40" Margin="0,25,0,0" VerticalContentAlignment="Center"
-                         Text="Иванов Иван Иванович" Foreground="Gray" FontSize="16" PreviewMouseDown="fullNameBox_PreviewMouseDown"/>
+                <TextBox x:Name="fullNameBox" Grid.Row="0" Width="120" Height="40" Margin="0,25,300,0" VerticalContentAlignment="Center"
+                         Text="{Binding Surname}" Foreground="Gray" FontSize="16" PreviewMouseDown="fullNameBox_PreviewMouseDown"/>
+                <TextBox x:Name="nameBox" Grid.Row="0" Width="120" Height="40" Margin="0,25,0,0" VerticalContentAlignment="Center"
+                         Text="{Binding Name}" FontSize="16"/>
+                <TextBox x:Name="patronymicBox" Grid.Row="0" Width="120" Height="40" Margin="300,25,0,0" VerticalContentAlignment="Center"
+                         Text="{Binding Patronymic}" FontSize="16"/>
 
                 <Label Content="Паспортные данные (серия и номер)" Grid.Row="1" FontSize="16"/>
                 <TextBox x:Name="passportData" Grid.Row="1" Width="300" Height="40" Margin="0,25,0,0" VerticalContentAlignment="Center"
-                         Text="8145 678867" Foreground="Gray" FontSize="16" PreviewMouseDown="passportData_PreviewMouseDown"/>
+                         Text="{Binding PassportData}" Foreground="Gray" FontSize="16" PreviewMouseDown="passportData_PreviewMouseDown"/>
 
                 <Label Content="Дата рождения" Grid.Row="2" FontSize="16"/>
-                <DatePicker x:Name="dobChoicer" Grid.Row="2" Width="300" Height="35" FontSize="16" Margin="0,10,0,0" SelectedDateChanged="dobChoicer_SelectedDateChanged"/>
+                <TextBox x:Name="dobBox" Grid.Row="2" Width="200" Height="40" Margin="0,25,200,0" VerticalContentAlignment="Center"
+                         Text="{Binding DateOfBirth}" FontSize="16"/>
+                <DatePicker x:Name="dobChoicer" Grid.Row="2" Width="180" Height="35" FontSize="16" Margin="240,25,0,0" SelectedDateChanged="dobChoicer_SelectedDateChanged"/>
 
                 <Label Content="Адрес" Grid.Row="3" FontSize="16"/>
                 <TextBox x:Name="adressBox" Grid.Row="3" Width="400" Height="40" Margin="0,25,0,0" VerticalContentAlignment="Center"
-                         FontSize="16"/>
+                         FontSize="16" Text="{Binding Adress}"/>
 
                 <Label Content="Email и пароль" Grid.Row="4" FontSize="16"/>
                 <TextBox x:Name="emailBox" Grid.Row="4" Width="200" Height="40" VerticalContentAlignment="Center" Margin="0,25,200,0"
-                         Text="example@gmail.com" Foreground="Gray" FontSize="16" PreviewMouseDown="emailBox_PreviewMouseDown"/>
+                         Text="{Binding Email}" Foreground="Gray" FontSize="16" PreviewMouseDown="emailBox_PreviewMouseDown"/>
                 <TextBox x:Name="passwordBox" Grid.Row="4" Width="150" Height="40" VerticalContentAlignment="Center" Margin="220,25,0,0"
-                         Text="Example12@" Foreground="Gray" FontSize="16" PreviewMouseDown="passwordBox_PreviewMouseDown"/>
+                         Text="{Binding Password}" Foreground="Gray" FontSize="16" PreviewMouseDown="passwordBox_PreviewMouseDown"/>
                 
                 <Button x:Name="addClientBtn" Grid.Row="5" Width="250" Height="50" Margin="0,0,100,0" Content="Добавить" Click="addClientBtn_Click"/>
                 <Button x:Name="cancelClientBtn" Grid.Row="5" Width="100" Height="50" Margin="300,0,0,0" Content="Отмена" Click="cancelClientBtn_Click"/>
@@ -86,21 +96,22 @@
                 </Grid.RowDefinitions>
 
                 <Label Content="Индентификационный номер" Grid.Row="0" FontSize="16"/>
-                <TextBox x:Name="idBox" Grid.Row="0" Width="200" Height="40" VerticalContentAlignment="Center" Margin="0,25,0,0"/>
+                <TextBox x:Name="idBox" Grid.Row="0" Width="200" Height="40" VerticalContentAlignment="Center" Margin="0,25,0,0"
+                         Text="{Binding ID}" FontSize="16"/>
 
                 <Label Content="Название услуги" Grid.Row="1" FontSize="16"/>
                 <TextBox x:Name="serviceNameBox" Grid.Row="1" Width="300" Height="40" VerticalContentAlignment="Center" Margin="0,25,0,0"
-                         FontSize="16"/>
+                         FontSize="16" Text="{Binding ServiceName}"/>
 
-                <Label Content="Код услуги и время проката" Grid.Row="2" FontSize="16"/>
+                <Label Content="Код услуги и время проката(в часах)" Grid.Row="2" FontSize="16"/>
                 <TextBox x:Name="serviceCodeBox" Grid.Row="2" Width="200" Height="40" VerticalContentAlignment="Center" Margin="0,25,200,0"
-                         Text="87HFGJKL33" Foreground="Gray" FontSize="16" PreviewMouseDown="serviceCodeBox_PreviewMouseDown"/>
+                         Text="{Binding ServiceCode}" Foreground="Gray" FontSize="16" PreviewMouseDown="serviceCodeBox_PreviewMouseDown"/>
                 <TextBox x:Name="serviceRentalBox" Grid.Row="2" Width="150" Height="40" VerticalContentAlignment="Center" Margin="220,25,0,0"
-                         Text="2 часа" Foreground="Gray" FontSize="16" PreviewMouseDown="serviceRentalBox_PreviewMouseDown"/>
+                         Text="{Binding RentalTime}" Foreground="Gray" FontSize="16" PreviewMouseDown="serviceRentalBox_PreviewMouseDown"/>
 
                 <Label Content="Стоимость за час" Grid.Row="3" FontSize="16"/>
                 <TextBox x:Name="serviceCostBox" Grid.Row="3" Width="200" Height="40" VerticalContentAlignment="Center" Margin="0,25,0,0"
-                         Text="2000" Foreground="Gray" FontSize="16" PreviewMouseDown="serviceCostBox_PreviewMouseDown"/>
+                         Text="{Binding CostPerHour}" Foreground="Gray" FontSize="16" PreviewMouseDown="serviceCostBox_PreviewMouseDown"/>
 
                 <Button x:Name="addServiceBtn" Grid.Row="4" Width="250" Height="50" Margin="0,0,100,0" Content="Добавить" Click="addServiceBtn_Click"/>
                 <Button x:Name="cancelServiceBtn" Grid.Row="4" Width="100" Height="50" Margin="300,0,0,0" Content="Отмена" Click="cancelServiceBtn_Click"/>
@@ -118,19 +129,22 @@
                 </Grid.RowDefinitions>
 
                 <Label Content="Идентификатор и ФИО (обязательно через пробелы)" Grid.Row="0" FontSize="16"/>
-                <TextBox x:Name="staffIdBox" Grid.Row="0" Width="100" Height="40" Margin="0,25,320,0" VerticalContentAlignment="Center"
-                         Text="112" Foreground="Gray" FontSize="16" PreviewMouseDown="staffIdBox_PreviewMouseDown"/>
-                <TextBox x:Name="staffFulNameBox" Grid.Row="0" Width="300" Height="40" Margin="120,25,0,0" VerticalContentAlignment="Center"
-                         Text="Иванов Иван Иванович" Foreground="Gray" FontSize="16" PreviewMouseDown="staffFulNameBox_PreviewMouseDown"/>
+                <TextBox x:Name="staffIdBox" Grid.Row="0" Width="60" Height="40" Margin="0,25,400,0" VerticalContentAlignment="Center"
+                         Text="{Binding ID}" Foreground="Gray" FontSize="16" PreviewMouseDown="staffIdBox_PreviewMouseDown"/>
+                <TextBox x:Name="staffFulNameBox" Grid.Row="0" Width="120" Height="40" Margin="0,25,200,0" VerticalContentAlignment="Center"
+                         Text="{Binding Surname}" Foreground="Gray" FontSize="16" PreviewMouseDown="staffFulNameBox_PreviewMouseDown"/>
+                <TextBox x:Name="staffnameBox" Grid.Row="0" Width="120" Height="40" Margin="60,25,0,0" VerticalContentAlignment="Center"
+                         Text="{Binding Name}" FontSize="16"/>
 
                 <Label Content="Логин и пароль" Grid.Row="1" FontSize="16"/>
                 <TextBox x:Name="staffEmailBox" Grid.Row="1" Width="200" Height="40" VerticalContentAlignment="Center" Margin="0,25,200,0"
-                         Text="example@gmail.com" Foreground="Gray" FontSize="16" PreviewMouseDown="staffEmailBox_PreviewMouseDown"/>
+                         Text="{Binding Login}" Foreground="Gray" FontSize="16" PreviewMouseDown="staffEmailBox_PreviewMouseDown"/>
                 <TextBox x:Name="staffpasswordBox" Grid.Row="1" Width="150" Height="40" VerticalContentAlignment="Center" Margin="220,25,0,0"
-                         Text="Example12@" Foreground="Gray" FontSize="16" PreviewMouseDown="staffpasswordBox_PreviewMouseDown"/>
+                         Text="{Binding Password}" Foreground="Gray" FontSize="16" PreviewMouseDown="staffpasswordBox_PreviewMouseDown"/>
 
                 <Label Content="Должность" Grid.Row="2" FontSize="16"/>
-                <ComboBox x:Name="staffPostCmb" Grid.Row="2" Width="300" Height="50" FontSize="16" VerticalContentAlignment="Center"/>
+                <ComboBox x:Name="staffPostCmb" Grid.Row="2" Width="300" Height="50" FontSize="16" VerticalContentAlignment="Center"
+                          SelectedIndex="{Binding Posts}" DisplayMemberPath="title"/>
 
                 <Label Content="Фото" Grid.Row="3" FontSize="16"/>
                 <Image x:Name="staffImage" Grid.Row="3" Width="100" Height="100" Margin="0,0,200,0"/>

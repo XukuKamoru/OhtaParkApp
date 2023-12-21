@@ -104,7 +104,7 @@ namespace OhtaPark
 
         private void dobChoicer_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            dobBox.Text = dobChoicer.SelectedDate.ToString();
         }
         bool IsNoFirstDown_emailBox = false;
         private void emailBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -212,7 +212,10 @@ namespace OhtaPark
             OpenFileDialog openFileDialog = new OpenFileDialog(); // создаем диалоговое окно
             openFileDialog.ShowDialog(); // показываем
             image_bytes = File.ReadAllBytes(openFileDialog.FileName); // получаем байты выбранного файла
-
+            Uri uri = new Uri(openFileDialog.FileName, UriKind.RelativeOrAbsolute);
+            BitmapImage image = new BitmapImage();
+            image.UriSource = uri;
+            staffImage.Source = image;
             string FromTB = staffFulNameBox.Text;
             FIO = FromTB.Split(' ');
             SurN = FIO[0];
@@ -241,6 +244,9 @@ namespace OhtaPark
             this.database = DataBase;
             this.DataContext = currentClient;
             this.Title = TitleC;
+            userCmb.ItemsSource = App.DateBase.Clients.ToList();
+            serviceCmb.ItemsSource = App.DateBase.Services.ToList();
+            statusCmb.ItemsSource = App.DateBase.Statuses.ToList();
         }
         public FunctionalWindow(Entities.OhtaParkEntities DataBase, Entities.Order currentOrder, string TitleO)
         {
@@ -259,6 +265,7 @@ namespace OhtaPark
             this.database = DataBase;
             this.DataContext = currentStaff;
             this.Title = TitleSt;
+            staffPostCmb.ItemsSource = App.DateBase.Posts.ToList();
         }
 
         private void cancelOrder_Click(object sender, RoutedEventArgs e)
@@ -326,6 +333,11 @@ namespace OhtaPark
 
             ChoicedServices.Content += Convert.ToString(serviceCmb.SelectedValue) + ", ";
             lastAddedService = Convert.ToString(serviceCmb.SelectedValue);
+        }
+
+        private void statusCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
         private void userCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
