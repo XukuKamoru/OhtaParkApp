@@ -1,0 +1,49 @@
+﻿<Window x:Class="OhtaPark.Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OhtaPark"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        Title="Охта Парк" WindowStartupLocation="CenterScreen" Height="450" Width="600">
+    <Grid Background="Khaki">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="clientsOpenBtn" Width="200" Height="40" Content="Клиенты" Grid.Row="1" Margin="0,50,0,0" VerticalContentAlignment="Center" Click="clientsOpenBtn_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="servicesOpenBtn" Width="200" Height="40" Content="Услуги" Grid.Row="1" Margin="0,0,0,100" VerticalContentAlignment="Center" Click="servicesOpenBtn_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="ordersOpenBtn" Width="200" Height="40" Content="Заказы" Grid.Row="1" Margin="0,0,0,250" VerticalContentAlignment="Center" Click="ordersOpenBtn_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="newUserBtn" Width="200" Height="40" Content="Сотрудники" Grid.Row="1" Margin="0,200,0,0" VerticalContentAlignment="Center" Click="newUserBtn_Click" Visibility="Hidden">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Label x:Name="timeInApp" Width="200" Height="30" HorizontalContentAlignment="Center"/>
+        <Button x:Name="outBtn" Content="Выйти" Width="100" Height="35" Margin="450,0,0,0" Click="outBtn_Click"/>
+
+    </Grid>
+</Window>

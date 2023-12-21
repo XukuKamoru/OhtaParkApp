@@ -1,0 +1,19 @@
+﻿<Window x:Class="OhtaPark.Captcha"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OhtaPark"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="Captcha" Height="450" Width="500" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid>
+        <Image x:Name="capImage" Width="300" Height="250" Margin="0,0,0,120"/>
+        <TextBox x:Name="input" Width="250" Height="50" Margin="0,210,0,0" FontSize="16"
+                 VerticalContentAlignment="Center"/>
+        <Button x:Name="checkBtn" Width="150" Height="50" Margin="0,340,200,0" FontSize="16"
+                Content="Проверить" Click="checkBtn_Click"/>
+        <Button x:Name="updateImage" Width="150" Height="50" Margin="200,340,0,0" FontSize="16"
+                Content="Обновить" Click="updateImage_Click"/>
+    </Grid>
+</Window>

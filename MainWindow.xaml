@@ -1,0 +1,28 @@
+﻿<Window x:Class="OhtaPark.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OhtaPark"
+        mc:Ignorable="d"
+        Closing="Window_Closing"
+        Title="Авторизация" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="450" Width="350">
+    <Grid Background="Khaki">
+        <Label Width="250" Height="30" Content="Логин" Margin="0,0,0,200"/>
+        <TextBox x:Name="lBox" Width="250" Height="30" Margin="0,0,0,150" VerticalContentAlignment="Center"/>
+        <Label Width="250" Height="30" Content="Пароль" Margin="0,0,0,50"/>
+        <PasswordBox x:Name="pBox" Width="250" Height="30" Margin="0,0,0,0" VerticalContentAlignment="Center" />
+        <TextBox x:Name="pTBox" Width="250" Height="30" Margin="0,0,0,0" VerticalContentAlignment="Center" Visibility="Hidden"/>
+        <CheckBox x:Name="IsShow" Width="150" Height="30" Content="Показать пароль" Margin="0,55,100,0" VerticalContentAlignment="Center"
+                  Checked="IsShow_Checked" Unchecked="IsShow_Unchecked"/>
+
+        <Button x:Name="authBtn" Width="200" Height="30" Content="Авторизоваться" Margin="0,200,0,0" VerticalContentAlignment="Center" Click="authBtn_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        
+    </Grid>
+</Window>
